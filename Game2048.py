@@ -8,7 +8,7 @@ pygame.init()
 #--Initial set up
 WIDTH = 400
 HEIGHT = 500
-screan = pygame.display.set_mode([WIDTH, HEIGHT])
+screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('2048')
 timer = pygame.time.Clock()
 fps = 60
@@ -33,7 +33,7 @@ color = {0: (204, 192, 179),
          'bg' : (187, 173, 160)}
 
 #--Game variable initialize
-board_value = [[0 for _ in range(4)] or _ in range(4)]
+board_value = [[0 for _ in range(4)] for _  in range(4)]
 game_over = False
 spawn_new = True 
 init_count = 0
@@ -45,3 +45,11 @@ file.close()
 high_score = init_high
 
 #--Draw game over and restart text
+def draw_over():
+    pygame.draw.rect(screen, 'black', [50, 50, 300, 100], 0, 10)
+    game_over_text1 = font.render('Game Over!', True, 'white')
+    game_over_text2  = font.render('Press Enter to Restart', True, 'white')
+    screen.blit(game_over_text1, (130, 65))
+    screen.blit(game_over_text2, (70, 105))
+    
+#--Take your turn based on direction
