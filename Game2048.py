@@ -15,4 +15,3 @@ fps = 60
 font = pygame.font.Font('freesambold.ttf', 24)
 
 
-
