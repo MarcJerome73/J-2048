@@ -91,3 +91,20 @@ def take_turn(direc, board):
                             board[2 - i + shift][j] = 0
                             merged[i][j - shift -1] = True
     
+    elif direc == 'LEFT': 
+        for i in range(4):
+            for j in range(4):
+                shift = 0
+                for q in range(j):
+                    if board[i][q] == 0:
+                        shift += 1
+                if shift > 0:
+                    board[i][j - shift] = board[i][j]
+                    board[i][j] = 0
+                if board[i][j] - shift == board[i][j - 1] and not merged[i][j - shift - 1] \
+                    and not merged[i][j - shift]:
+                        board[i][j - shift - 1] *= 2
+                        score += board[i][j - shift - 1]
+                        board[i][j - shift] = 0
+                        merged[i][j - shift - 1] = True
+
