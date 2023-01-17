@@ -83,7 +83,7 @@ def take_turn(direc, board):
                         shift += 1
                     if shift > 0:
                         board[2 - i + shift][j] = board[2 - i][j]
-                        board[2 -i][j] = 0
+                        board[2 - i][j] = 0
                     if 3 - i + shift <= 3:
                         if board[2 - i + shift][j] == board[3 - i + shift][j] and not merged[3  - i + shift][j] and not merged[2 - i + shift][j]:
                             board[3 - i + shift][j] *= 2
