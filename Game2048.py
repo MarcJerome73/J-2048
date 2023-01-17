@@ -15,7 +15,7 @@ fps = 60
 font = pygame.font.Font('freesambold.ttf', 24)
 
 #--2048 game colo library
-color = {0: (204, 192, 179),
+colors = {0: (204, 192, 179),
          2: (238, 228, 218),
          4: (237, 224, 200),
          8: (242, 177, 121),
@@ -145,6 +145,35 @@ def new_pieces(board):
         full = True
     return board, full
 
-# Draw backgrond for the board
+#--Draw backgrond for the board
+def draw_board():
+    pygame.draw.rect(screen, colors['bg'], [0, 0, 400, 400], 0, 10)
+    score_text = font.render(f'Score: {score}', True, 'black')
+    high_score_text = font.render(f'High Score: {high_score}', True, 'black')
+    screen.blit(score_text, (10, 410))
+    screen.blit(high_score_text, (10, 450))
+    pass
 
-
+#--Draw titles for game
+def draw_pieces(board):
+    for i in range(4):
+        for j in range(4):
+            value = board[i][j]
+            if value > 8:
+                value_color = colors['light text']
+            else:
+                value_color = colors['dark text']
+            if value <= 2048:
+                color = colors[value]
+            else:
+                color = colors['other']
+            pygame.draw.rect(screen, color, [j * 95 + 20, i * 95 + 20, 75, 75], 0, 5)
+            if value > 0:
+                value_len = len(str(value))
+                font = pygame.font.Font('freesanbold.ttf', 48 - (5 * value_len))
+                value_text = value_text(str(value), True, value_color)
+                text_rect = value_text.get_rect(center=(j * 95 + 57, i * 95 + 57))
+                screen.blit(value_text, text_rect)
+                pygame.draw.rect(screen, 'black', [j * 95 + 20, i * 95 + 20, 75, 75], 2, 5)
+                
+#--Main game loop
